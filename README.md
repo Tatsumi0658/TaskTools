@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+user_table
+|Column|Type|Modifiers|
+|:---|:---|:---|
+|id|integer|not null auto_increment primary_key|
+|name|string|not null|
+|email|string|not null unique|
+|password_digest|string|not null|
 
-Things you may want to cover:
+task_table
+|Column|Type|Modifiers|
+|:---|:---|:---|
+|id|integer|not null auto_increment primary_key|
+|name|string|not null|
+|status|integer|not null|
+|deadline|datetime|not null|
+|priority|integer|not null|
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+label_table
+|Column|Type|Modifiers|
+|:---|:---|:---|
+|name|string|not null|
