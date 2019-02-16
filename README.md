@@ -18,9 +18,11 @@ task_table
 | status | integer | not null |
 | deadline | datetime | not null |
 | priority | integer | not null |
+| usr_id | integer | foreign_key |
 
 label_table
 
 | Column | Type | Modifiers |
 | :--- | :--- | :--- |
 | name | string | not null |
+| task_id | integer | foreign_key |
