@@ -1,12 +1,13 @@
 # README
 
 user_table
-|Column|Type|Modifiers|
-|:---|:---|:---|
-|id|integer|not null auto_increment primary_key|
-|name|string|not null|
-|email|string|not null unique|
-|password_digest|string|not null|
+
+| Column | Type | Modifiers |
+| :--- | :--- | :--- |
+| id | integer | not null auto_increment primary_key |
+| name | string | not null |
+| email | string | not null unique |
+| password_digest | string | not null |
 
 task_table
 |Column|Type|Modifiers|
