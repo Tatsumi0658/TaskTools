@@ -1,0 +1,15 @@
+<%= form_with(model: @todotask, local:true) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :status %>
+  <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]] %>
+
+  <%= f.label :deadline %>
+  <%= f.date_select :deadline, default:Date.new(2020,1,1) %>
+
+  <%= f.label :priority %>
+  <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]] %>
+
+  <%= f.submit "登録" %>
+<% end %>

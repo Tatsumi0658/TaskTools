@@ -6,6 +6,7 @@ user_table
 | :--- | :--- | :--- |
 | id | integer | not null auto_increment primary_key |
 | name | string | not null |
+| content | text |  |
 | email | string | not null unique |
 | password_digest | string | not null |
 

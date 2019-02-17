@@ -1,0 +1,19 @@
+<h1>Todotasks#index</h1>
+<% @todotasks.each do |task| %>
+  <%= task.name %>
+  <% if task.status == 1 %>
+    未着手
+  <% elsif task.status == 2 %>
+    着手
+  <% else %>
+    完了
+  <% end %>
+  <%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %>
+  <% if task.priority == 1 %>
+    高
+  <% elsif task.priority == 2 %>
+    中
+  <% else task.priority == 3 %>
+    低
+  <% end %>
+<% end %>
