@@ -1,31 +1,44 @@
 <h1>Todotasks#index</h1>
-<% @todotasks.each do |task| %>
-  <table>
-    <tr>
-      <%= task.name %>
-      <% if task.content.nil? %>
-        から
-      <% else %>
-        <%= task.content %>
-      <% end %>
-      <% if task.status == 1 %>
-        未着手
-      <% elsif task.status == 2 %>
-        着手
-      <% else %>
-        完了
-      <% end %>
-      <%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %>
-      <% if task.priority == 1 %>
-        高
-      <% elsif task.priority == 2 %>
-        中
-      <% else %>
-        低
-      <% end %>
-      <%= link_to "詳細", todotask_path(task.id) %>
-      <%= link_to "編集", edit_todotask_path(task.id) %>
-      <%= link_to "削除", todotask_path(task.id), method: :delete %>
-    </tr>
-  </table>
-<% end %>
+<table>
+  <tr>
+    <th>タスク名</th>
+    <th>タスク詳細</th>
+    <th>ステータス</th>
+    <th>期限</th>
+    <th>優先度</th>
+  </tr>
+  <% @todotasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td>
+          <% if task.content.nil? %>
+            から
+          <% else %>
+            <%= task.content %>
+          <% end %>
+        </td>
+        <td>
+          <% if task.status == 1 %>
+            未着手
+          <% elsif task.status == 2 %>
+            着手
+          <% else %>
+            完了
+          <% end %>
+        </td>
+        <td><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
+        <td>
+          <% if task.priority == 1 %>
+            高
+          <% elsif task.priority == 2 %>
+            中
+          <% else %>
+            低
+          <% end %>
+        </td>
+        <td><%= link_to "詳細", todotask_path(task.id) %></td>
+        <td><%= link_to "編集", edit_todotask_path(task.id) %></td>
+        <td><%= link_to "削除", todotask_path(task.id), method: :delete %></td>
+      </tr>
+  <% end %>
+</table>
