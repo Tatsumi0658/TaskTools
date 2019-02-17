@@ -10,6 +10,7 @@ class TodotasksController < ApplicationController
 
   def create
     @todotask = Todotask.new(todotask_params)
+    @todotask.user_id = current_user.id
     @todotask.deadline = Date.new(todotask_params["deadline(1i)"].to_i, todotask_params["deadline(2i)"].to_i, todotask_params["deadline(3i)"].to_i)
     if @todotask.save
       redirect_to todotasks_path

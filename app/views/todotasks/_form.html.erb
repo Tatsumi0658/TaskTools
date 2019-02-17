@@ -1,4 +1,10 @@
 <%= form_with(model:@todotask, local:true) do |f| %>
+  <% if @todotask.errors.any? %>
+    <% @todotask.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
 

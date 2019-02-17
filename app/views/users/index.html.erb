@@ -1,4 +1,6 @@
-<h1>Users#index</h1>
+<h1>User一覧</h1>
 <% @users.each do |u| %>
   <%= u.name %>
+  <%= link_to "編集", edit_user_path(u.id) %>
+  <%= link_to "削除", user_path(u.id), method: :delete %>
 <% end %>

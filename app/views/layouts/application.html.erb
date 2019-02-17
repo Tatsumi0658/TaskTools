@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <% if current_user.present? %>
+      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <%= link_to "タスク作成", new_todotask_path %>
+    <% else %>
+      <%= link_to "新規登録", new_user_path %>
+      <%= link_to "Login", new_session_path %>
+    <% end %>
+    <% flash.each do |message_type, msg| %>
+      <%= msg %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

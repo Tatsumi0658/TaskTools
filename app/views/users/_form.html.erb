@@ -1,4 +1,10 @@
 <%= form_with(model:@user, local:true) do |f| %>
+  <% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+  
   <%= f.label :name %>
   <%= f.text_field :name %>
 
