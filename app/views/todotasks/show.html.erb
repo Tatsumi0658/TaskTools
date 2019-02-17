@@ -1,2 +1,19 @@
 <h1>Todotasks#show</h1>
-<p>Find me in app/views/todotasks/show.html.erb</p>
+<%= @todotask.name %>
+<%= @todotask.content %>
+<%= @todotask.deadline.year %>-<%= @todotask.deadline.month %>-<%= @todotask.deadline.day %>
+<% if @todotask.status == 1 %>
+  未着手
+<% elsif @todotask.status == 2 %>
+  着手
+<% else %>
+  完了
+<% end %>
+
+<% if @todotask.priority == 1 %>
+  高
+<% elsif @todotask.priority == 2 %>
+  中
+<% else %>
+  低
+<% end %>

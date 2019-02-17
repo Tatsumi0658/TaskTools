@@ -28,7 +28,7 @@ class TodotasksController < ApplicationController
 
   def update
     if @todotask.update(todotask_params)
-      redirect_to tasks_path
+      redirect_to todotasks_path
       flash[:success] = "タスクを更新しました"
     else
       render :edit
@@ -37,7 +37,7 @@ class TodotasksController < ApplicationController
 
   def destroy
     @todotask.destroy
-    redirect_to tasks_path
+    redirect_to todotasks_path
     flash[:success] = "削除しました"
   end
 
@@ -47,6 +47,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :status, :deadline, :priority)
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority)
   end
 end
