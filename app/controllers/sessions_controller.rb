@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       redirect_to new_todotask_path
+      flash[:success] = "ログインに成功しました"
     else
       render :new
     end
