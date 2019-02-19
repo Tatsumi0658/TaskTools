@@ -1,0 +1,27 @@
+ja:
+  view:
+    show: 詳細
+    edit: 編集
+    delete: 削除
+    todotasks:
+      index: タスク一覧
+      show: タスク詳細
+      edit: タスク編集
+      new: タスク作成
+      name: タスク名
+      content: タスク詳細
+      status: ステータス
+      deadline: 期限
+      priority: 優先度
+      author: 作者
+      status_1: 未着手
+      status_2: 着手
+      status_3: 完了
+      priority_high: 高
+      priority_middle: 中
+      priority_low: 低
+    users:
+      new: ユーザー登録
+      index: ユーザー一覧
+      show: ユーザー詳細
+      edit: ユーザー情報編集

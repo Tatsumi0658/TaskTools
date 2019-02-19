@@ -1,0 +1,23 @@
+ja:
+  sessions:
+    create:
+      success: ログインに成功しました
+      failed: ログインに失敗しました
+  todotasks:
+    create:
+      success: タスクを作成しました
+      failed: タスクの作成に失敗しました
+    update:
+      success: 更新しました
+      failed: 失敗しました
+    destroy:
+      success: 削除しました
+  users:
+    create:
+      success: ユーザーを作成しました
+      failed: 作成できませんでした
+    update:
+      success: 更新しました
+      failed: 失敗しました
+    destroy:
+      success: 削除しました

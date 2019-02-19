@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to new_session_path
-      flash[:success] = "ユーザーを作成しました"
+      flash[:success] = t('.success')
     else
       render :new
-      flash[:danger] = "失敗しました"
+      flash[:danger] = t('.failed')
     end
   end
 
@@ -29,17 +29,17 @@ class UsersController < ApplicationController
   def update
     if @user.update(set_user)
       redirect_to todotasks_path
-      flash[:success] = "更新しました"
+      flash[:success] = t('.success')
     else
       render :edit
-      flash[:danger] = "失敗しました"
+      flash[:danger] = t('.failed')
     end
   end
 
   def destroy
     @user.destroy
     redirect_to todotasks_path
-    flash[:success] = "削除しました"
+    flash[:success] = t('.success')
   end
 
   private

@@ -1,12 +1,12 @@
-<h1><%= t('todotask_index') %></h1>
+<h1><%= t('view.todotasks.index') %></h1>
 <table>
   <tr>
-    <th>タスク名</th>
-    <th>タスク詳細</th>
-    <th>ステータス</th>
-    <th>期限</th>
-    <th>優先度</th>
-    <th>作者</th>
+    <th><%= t('view.todotasks.name') %></th>
+    <th><%= t('view.todotasks.content') %></th>
+    <th><%= t('view.todotasks.status') %></th>
+    <th><%= t('view.todotasks.deadline') %></th>
+    <th><%= t('view.todotasks.priority') %></th>
+    <th><%= t('view.todotasks.author') %></th>
   </tr>
   <% @todotasks.each do |task| %>
       <tr>
@@ -20,21 +20,21 @@
         </td>
         <td>
           <% if task.status == 1 %>
-            未着手
+            <%= t('view.todotasks.status_1') %>
           <% elsif task.status == 2 %>
-            着手
+            <%= t('view.todotasks.status_2') %>
           <% else %>
-            完了
+            <%= t('view.todotasks.status_3') %>
           <% end %>
         </td>
         <td><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
         <td>
           <% if task.priority == 1 %>
-            高
+            <%= t('view.todotasks.priority_high') %>
           <% elsif task.priority == 2 %>
-            中
+            <%= t('view.todotasks.priority_middle') %>
           <% else %>
-            低
+            <%= t('view.todotasks.priority_low') %>
           <% end %>
         </td>
         <td>
@@ -44,9 +44,9 @@
 
           <% end %>
           </td>
-        <td><%= link_to "詳細", todotask_path(task.id) %></td>
-        <td><%= link_to "編集", edit_todotask_path(task.id) %></td>
-        <td><%= link_to "削除", todotask_path(task.id), method: :delete %></td>
+        <td><%= link_to t('view.show'), todotask_path(task.id) %></td>
+        <td><%= link_to t('view.edit'), edit_todotask_path(task.id) %></td>
+        <td><%= link_to t('view.delete'), todotask_path(task.id), method: :delete %></td>
       </tr>
   <% end %>
 </table>

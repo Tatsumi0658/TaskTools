@@ -14,10 +14,10 @@ class TodotasksController < ApplicationController
     @todotask.deadline = Date.new(todotask_params["deadline(1i)"].to_i, todotask_params["deadline(2i)"].to_i, todotask_params["deadline(3i)"].to_i)
     if @todotask.save
       redirect_to todotasks_path
-      flash[:success] = "タスクを作成しました"
+      flash[:success] = t('.success')
     else
       render :new
-      flash[:warning] = "タスクの作成に失敗しました"
+      flash[:warning] = t('.failed')
     end
   end
 
@@ -30,16 +30,17 @@ class TodotasksController < ApplicationController
   def update
     if @todotask.update(todotask_params)
       redirect_to todotasks_path
-      flash[:success] = "タスクを更新しました"
+      flash[:success] = t('.success')
     else
       render :edit
+      flash[:danger] = t('.failed')
     end
   end
 
   def destroy
     @todotask.destroy
     redirect_to todotasks_path
-    flash[:success] = "削除しました"
+    flash[:success] = t('.success')
   end
 
   private

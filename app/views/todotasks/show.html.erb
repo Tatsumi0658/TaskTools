@@ -1,19 +1,19 @@
-<h1>タスク詳細</h1>
+<h1><%= t('view.todotasks.show') %></h1>
 <%= @todotask.name %>
 <%= @todotask.content %>
 <%= @todotask.deadline.year %>-<%= @todotask.deadline.month %>-<%= @todotask.deadline.day %>
 <% if @todotask.status == 1 %>
-  未着手
+  <%= t('view.todotasks.status_1') %>
 <% elsif @todotask.status == 2 %>
-  着手
+  <%= t('view.todotasks.status_2') %>
 <% else %>
-  完了
+  <%= t('view.todotasks.status_3') %>
 <% end %>
 
 <% if @todotask.priority == 1 %>
-  高
+  <%= t('view.todotasks.priority_high') %>
 <% elsif @todotask.priority == 2 %>
-  中
+  <%= t('view.todotasks.priority_middle') %>
 <% else %>
-  低
+  <%= t('view.todotasks.priority_low') %>
 <% end %>

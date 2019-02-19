@@ -144,6 +144,21 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+    label:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: もう一度入力してください
+      session:
+        email: メールアドレス
+        password: パスワード
+      todotask:
+        name: タスク名
+        content: タスク詳細
+        status: ステータス
+        deadline: 期限
+        priority: 優先度
   number:
     currency:
       format:
