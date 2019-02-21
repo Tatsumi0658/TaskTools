@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "タスク管理機能", type: :feature do
+  before do
+    FactoryBot.create(:todotask)
+    FactoryBot.create(:second_todotask)
+  end
 
   scenario "タスク一覧のテスト" do
-    Todotask.create!(name: "test01", content:"testtesttest", status: 1, deadline:"2019-03-03 00:00:00", priority: 1)
-    Todotask.create!(name: "test02", content:"samplesamplee", status: 2, deadline:"2019-03-01 00:00:00", priority: 2)
-
     visit todotasks_path
 
-    expect(page).to have_content "testtesttest"
-    expect(page).to have_content "samplesamplee"
+    expect(page).to have_content "Factoryで作ったデフォルトの内容1"
+    expect(page).to have_content "Factoryで作ったデフォルトの内容2"
   end
 
   before do
@@ -18,22 +19,22 @@ RSpec.feature "タスク管理機能", type: :feature do
   scenario "タスク作成のテスト" do
     #ログインページ来訪
     visit new_session_path
-    fill_in 'Email', with: 'example@example.com'
-    fill_in 'Password', with: '123456'
+    fill_in 'メールアドレス', with: 'example@example.com'
+    fill_in 'パスワード', with: '123456'
     click_button 'Login'
 
     #ログインに成功したら表示される
     expect(page).to have_content "ログインに成功しました"
 
     #タスク作成
-    fill_in 'Name', with: 'task01'
-    fill_in 'Content', with: 'test_task01'
-    select '未着手', from: 'Status'
+    fill_in 'タスク名', with: 'task01'
+    fill_in 'タスク詳細', with: 'test_task01'
+    select '未着手', from: 'ステータス'
     select '2019', from: 'todotask_deadline_1i'
-    select 'February', from: 'todotask_deadline_2i'
-    select '高', from: 'Priority'
+    select '2月', from: 'todotask_deadline_2i'
+    select '高', from: '優先度'
 
-    click_on '登録'
+    click_on '登録する'
 
     #成功したらこのページに飛ぶ
     expect(page).to have_content "test_task01"
@@ -43,8 +44,12 @@ RSpec.feature "タスク管理機能", type: :feature do
     Todotask.create!(name: "test03", content:"testtesttest3", status: 1, deadline:"2019-03-04 00:00:00", priority: 1)
     visit todotasks_path
     #save_and_open_page
-    click_on '詳細'
+    page.first(:link, "詳細").click
     expect(page).to have_content "タスク詳細"
+  end
 
+  scenario "タスクが作成日時の降順に並んでいるかのテスト" do
+    visit todotasks_path
+    expect(Todotask.order("created_at desc").map(&:id)).to eq [10,9]
   end
 end
