@@ -1,0 +1,15 @@
+{
+  "name": "Tasktools",
+  "description": "Task Management Tools",
+  "website": "https://github.com/Tatsumi0658/TaskTools",
+  "repository": "https://github.com/Tatsumi0658/TaskTools",
+  "logo": "https://github.com/Tatsumi0658/TaskTools/master/public/images/logo.png",
+  "success_url": "/",
+  "keywords": [
+    "Task",
+    "Task Management"
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
+}

@@ -27,3 +27,8 @@ label_table
 | :--- | :--- | :--- |
 | name | string | not null |
 | task_id | integer | foreign_key |
+
+
+#Deploy
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
