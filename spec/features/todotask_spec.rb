@@ -52,4 +52,11 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit todotasks_path
     expect(Todotask.order("created_at desc").map(&:id)).to eq [10,9]
   end
+
+  scenario "並び替え機能のテスト" do
+    Todotask.create!(name: "test04", content:"testtesttest4", status: 1, deadline:"2018-03-04 00:00:00", priority: 1)
+    visit todotasks_path
+    click_on '終了期限でソートする'
+    expect(Todotask.order("deadline desc").map(&:id)).to eq [12,11,13]
+  end
 end

@@ -1,7 +1,11 @@
 class TodotasksController < ApplicationController
   before_action :set_task, only:[:edit, :destroy, :show, :update]
   def index
-    @todotasks = Todotask.all.order('created_at desc')
+    if params[:sort_expired].present?
+      @todotasks = Todotask.all.order('deadline desc')
+    else
+      @todotasks = Todotask.all.order('created_at desc')
+    end
   end
 
   def new
