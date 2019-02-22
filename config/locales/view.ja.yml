@@ -25,3 +25,5 @@ ja:
       index: ユーザー一覧
       show: ユーザー詳細
       edit: ユーザー情報編集
+    errors:
+      name: タスク名

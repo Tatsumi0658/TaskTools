@@ -1,5 +1,10 @@
 ja:
   activerecord:
+    models:
+      todotask: タスク
+    attributes:
+      todotask:
+        name: タスク名
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
