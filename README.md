@@ -1,6 +1,6 @@
 # README
 
-・Version
+#Version
 Rails 5.2.2
 
 user_table
@@ -32,6 +32,6 @@ label_table
 | task_id | integer | foreign_key |
 
 
-・Deploy
+#Deploy
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
