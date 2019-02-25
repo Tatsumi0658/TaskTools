@@ -59,4 +59,40 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on '終了期限でソートする'
     expect(Todotask.order("deadline desc").map(&:id)).to eq [12,11,13]
   end
+
+  scenario "タスク名、ステータス両方入力時の検索テスト" do
+    visit todotasks_path
+    fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
+    select '未着手', from: 'ステータス'
+    click_on '登録する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "タスク名、ステータス両方入力時の検索テスト" do
+    visit todotasks_path
+    fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
+    select '未着手', from: 'ステータス'
+    click_on '登録する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "タスク名入力時の検索テスト" do
+    visit todotasks_path
+    fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
+    click_on '登録する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "ステータス入力時の検索テスト" do
+    visit todotasks_path
+    select '未着手', from: 'ステータス'
+    click_on '登録する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "空入力時の検索テスト" do
+    visit todotasks_path
+    click_on '登録する'
+    expect(page).to have_content ""
+  end
 end
