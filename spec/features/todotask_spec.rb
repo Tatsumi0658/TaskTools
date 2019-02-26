@@ -59,4 +59,14 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on '終了期限でソートする'
     expect(Todotask.order("deadline desc").map(&:id)).to eq [12,11,13]
   end
+
+  scenario "ページネーションのテスト" do
+    Todotask.create!(name: "test04", content:"testtesttest4", status: 1, deadline:"2018-03-04 00:00:00", priority: 3)
+    Todotask.create!(name: "test05", content:"testtesttest5", status: 2, deadline:"2018-03-04 00:00:00", priority: 2)
+    Todotask.create!(name: "test06", content:"testtesttest6", status: 3, deadline:"2018-03-04 00:00:00", priority: 1)
+    visit todotasks_path
+    click_on 'Next'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名2"
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
 end
