@@ -11,6 +11,8 @@ class TodotasksController < ApplicationController
       end
     elsif params[:sort_expired].present?
       @todotasks = Todotask.all.order('deadline desc')
+    elsif params[:priority_sort_expired].present?
+      @todotasks = Todotask.all.order('priority asc')
     else
       @todotasks = Todotask.all.order('created_at desc')
     end
