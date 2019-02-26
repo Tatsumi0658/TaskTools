@@ -2,9 +2,9 @@ class TodotasksController < ApplicationController
   before_action :set_task, only:[:edit, :destroy, :show, :update]
   def index
     if params[:sort_expired].present?
-      @todotasks = Todotask.all.order('deadline desc')
+      @todotasks = Todotask.all.order('deadline desc').page params[:page]
     else
-      @todotasks = Todotask.all.order('created_at desc')
+      @todotasks = Todotask.all.order('created_at desc').page params[:page]
     end
   end
 
