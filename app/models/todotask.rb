@@ -3,4 +3,5 @@ class Todotask < ApplicationRecord
   belongs_to :user, optional: true
   scope :search_name, -> (name){ where("name LIKE ?", name) }
   scope :search_status, -> (status){ where(status: status) }
+  paginates_per 3
 end
