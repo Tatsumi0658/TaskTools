@@ -1,5 +1,17 @@
 <h1><%= t('view.todotasks.index') %></h1>
 <%= link_to "終了期限でソートする", todotasks_path(sort_expired: "true") %>
+<%= link_to "優先度でソートする", todotasks_path(priority_sort_expired: "true") %>
+<%= form_with(model: Todotask.new, url: todotasks_path, local:true, method: :get) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :status %>
+  <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]], include_blank: true %>
+
+  <%= f.hidden_field :search_flag, value: "true" %>
+
+  <%= f.submit t('view.todotasks.search') %>
+<% end %>
 <table>
   <tr>
     <th><%= t('view.todotasks.name') %></th>

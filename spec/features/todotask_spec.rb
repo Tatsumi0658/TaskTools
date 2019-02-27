@@ -69,4 +69,39 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content "Factoryで作ったデフォルトのタスク名2"
     expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
   end
+
+  scenario "タスク名、ステータス両方入力時の検索テスト" do
+    visit todotasks_path
+    fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
+    select '未着手', from: 'ステータス'
+    click_on '検索する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "タスク名入力時の検索テスト" do
+    visit todotasks_path
+    fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
+    click_on '検索する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "ステータス入力時の検索テスト" do
+    visit todotasks_path
+    select '未着手', from: 'ステータス'
+    click_on '検索する'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
+  scenario "空入力時の検索テスト" do
+    visit todotasks_path
+    click_on '検索する'
+    expect(page).to have_content ""
+  end
+
+  scenario "優先度でソートするテスト" do
+    Todotask.create!(name: "test05", content:"testtesttest4", status: 1, deadline:"2018-03-04 00:00:00", priority: 3)
+    visit todotasks_path
+    click_on '優先度でソートする'
+    expect(Todotask.order('priority asc').map(&:id)).to eq [22,23,24]
+  end
 end

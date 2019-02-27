@@ -20,6 +20,7 @@ ja:
       priority_high: 高
       priority_middle: 中
       priority_low: 低
+      search: 検索する
     users:
       new: ユーザー登録
       index: ユーザー一覧
