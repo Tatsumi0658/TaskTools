@@ -1,19 +1,29 @@
-<h1><%= t('view.todotasks.show') %></h1>
-<%= @todotask.name %>
-<%= @todotask.content %>
-<%= @todotask.deadline.year %>-<%= @todotask.deadline.month %>-<%= @todotask.deadline.day %>
-<% if @todotask.status == 1 %>
-  <%= t('view.todotasks.status_1') %>
-<% elsif @todotask.status == 2 %>
-  <%= t('view.todotasks.status_2') %>
-<% else %>
-  <%= t('view.todotasks.status_3') %>
-<% end %>
-
-<% if @todotask.priority == 1 %>
-  <%= t('view.todotasks.priority_high') %>
-<% elsif @todotask.priority == 2 %>
-  <%= t('view.todotasks.priority_middle') %>
-<% else %>
-  <%= t('view.todotasks.priority_low') %>
-<% end %>
+<h2><%= t('view.todotasks.show') %></h2>
+<h4 class="mt-5"><%= t('view.todotasks.name') %></h4>
+<p class="form-control"><%= @todotask.name %></p>
+<h4><%= t('view.todotasks.content') %></h4>
+<p class="from-control"><%= @todotask.content %></p>
+<h4><%= t('view.todotasks.deadline') %></h4>
+<p class="form-control"><%= @todotask.deadline.year %>-<%= @todotask.deadline.month %>-<%= @todotask.deadline.day %></p>
+<h4><%= t('view.todotasks.status') %></h4>
+<p class="form-control">
+  <% if @todotask.status == 1 %>
+    <%= t('view.todotasks.status_1') %>
+  <% elsif @todotask.status == 2 %>
+    <%= t('view.todotasks.status_2') %>
+  <% else %>
+    <%= t('view.todotasks.status_3') %>
+  <% end %>
+</p>
+<h4><%= t('view.todotasks.priority') %></h4>
+<p class="form-control">
+  <% if @todotask.priority == 1 %>
+    <%= t('view.todotasks.priority_high') %>
+  <% elsif @todotask.priority == 2 %>
+    <%= t('view.todotasks.priority_middle') %>
+  <% else %>
+    <%= t('view.todotasks.priority_low') %>
+  <% end %>
+</p>
+<%= link_to t('view.edit'), edit_todotask_path(@todotask.id), class:"btn btn-secondary" %>
+<%= link_to t('view.delete'), todotask_path(@todotask.id), method: :delete, class:"btn btn-danger" %>

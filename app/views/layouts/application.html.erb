@@ -12,18 +12,39 @@
   </head>
 
   <body>
-    <div class="container">
-      <% if current_user.present? %>
-        <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-        <%= link_to t('view.todotasks.new'), new_todotask_path %>
-      <% else %>
-        <%= link_to t('view.users.new'), new_user_path %>
-        <%= link_to "Login", new_session_path %>
-      <% end %>
-      <% flash.each do |message_type, msg| %>
-        <%= msg %>
-      <% end %>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container">
+          <a class="navbar-brand" href="/">Todotasktools</a>
+          <div class="cnavbar-nav float-lg-right" id="Navbar">
+            <ul class="navbar-nav mr-auto">
+              <% if current_user.present? %>
+              <li class="nav-item">
+                <%= link_to t('view.todotasks.new'), new_todotask_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Logout", session_path(current_user.id), method: :delete, class:"nav-link" %>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <%= link_to t('view.users.new'), new_user_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Login", new_session_path, class:"nav-link" %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+        <% flash.each do |message_type, msg| %>
+          <div class="alert alert-<%= message_type %>">
+            <%= msg %>
+          </div>
+        <% end %>
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

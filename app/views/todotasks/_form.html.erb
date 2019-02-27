@@ -5,20 +5,20 @@
     <% end %>
   <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.label :name, class:"mt-4 label-control" %>
+  <%= f.text_field :name, class:"form-control" %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content %>
+  <%= f.label :content, class:"mt-4" %>
+  <%= f.text_area :content, class:"form-control" %>
 
-  <%= f.label :status %>
-  <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]] %>
+  <%= f.label :status, class:"mt-4" %>
+  <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]], {}, class:"form-control" %>
 
-  <%= f.label :deadline %>
-  <%= f.date_select :deadline, default:Date.new(2020,1,1) %>
+  <%= f.label :deadline, class:"mt-4" %><br />
+  <%= f.date_select :deadline, { default:Date.new(2020,1,1) }, class:"form-control d-inline-block col-md-2 col-xs-2" %>
+  <br />
+  <%= f.label :priority, class:"mt-4" %>
+  <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]], {}, class:"form-control" %>
 
-  <%= f.label :priority %>
-  <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]] %>
-
-  <%= f.submit %>
+  <%= f.submit class:"mt-4 btn btn-primary" %>
 <% end %>

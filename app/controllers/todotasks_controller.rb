@@ -54,7 +54,7 @@ class TodotasksController < ApplicationController
   def destroy
     @todotask.destroy
     redirect_to todotasks_path
-    flash[:success] = t('.success')
+    flash[:danger] = t('.success')
   end
 
   private

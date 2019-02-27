@@ -1,26 +1,31 @@
-<h1><%= t('view.todotasks.index') %></h1>
-<%= link_to "終了期限でソートする", todotasks_path(sort_expired: "true") %>
-<%= link_to "優先度でソートする", todotasks_path(priority_sort_expired: "true") %>
-<%= form_with(model: Todotask.new, url: todotasks_path, local:true, method: :get, class:"form-inline") do |f| %>
-  <%= f.label :name, class:"sr-only" %>
-  <%= f.text_field :name, class:"form-control col-md-4 col-xs-12 mb-2 mr-sm-4", placeholder: "タスク名" %>
+<h2><%= t('view.todotasks.index') %></h2>
+<%= link_to "終了期限でソートする", todotasks_path(sort_expired: "true"), class:"btn btn-danger mt-4" %>
+<%= link_to "優先度でソートする", todotasks_path(priority_sort_expired: "true"), class:"btn btn-warning mt-4" %>
+<%= form_with(model: Todotask.new, url: todotasks_path, local:true, method: :get, class:"form-inline mt-4") do |f| %>
+  <%= f.label :name, class:"mr-2" %>
+  <%= f.text_field :name, class:"form-control col-md-4 col-xs-12 mb-2 mr-sm-4" %>
 
-  <%= f.label :status %>
+  <%= f.label :status, class:"mr-2" %>
   <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]], { include_blank: true }, class:"form-control col-md-2 col-xs-12 mb-2 mr-sm-2" %>
 
   <%= f.hidden_field :search_flag, value: "true" %>
 
   <%= f.submit t('view.todotasks.search'), class:"btn btn-primary mb-2" %>
 <% end %>
-<table>
-  <tr>
-    <th><%= t('view.todotasks.name') %></th>
-    <th><%= t('view.todotasks.content') %></th>
-    <th><%= t('view.todotasks.status') %></th>
-    <th><%= t('view.todotasks.deadline') %></th>
-    <th><%= t('view.todotasks.priority') %></th>
-    <th><%= t('view.todotasks.author') %></th>
-  </tr>
+<table class="table mt-5">
+  <thead class="thead-dark text-center">
+    <tr>
+      <th><%= t('view.todotasks.name') %></th>
+      <th><%= t('view.todotasks.content') %></th>
+      <th><%= t('view.todotasks.status') %></th>
+      <th><%= t('view.todotasks.deadline') %></th>
+      <th><%= t('view.todotasks.priority') %></th>
+      <th><%= t('view.todotasks.author') %></th>
+      <th><%= t('view.show') %></th>
+      <th><%= t('view.edit') %></th>
+      <th><%= t('view.delete') %></th>
+    </tr>
+  </thead>
   <% @todotasks.each do |task| %>
       <tr>
         <td><%= task.name %></td>
@@ -31,7 +36,7 @@
             <%= task.content %>
           <% end %>
         </td>
-        <td>
+        <td class="text-center">
           <% if task.status == 1 %>
             <%= t('view.todotasks.status_1') %>
           <% elsif task.status == 2 %>
@@ -40,8 +45,8 @@
             <%= t('view.todotasks.status_3') %>
           <% end %>
         </td>
-        <td><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
-        <td>
+        <td class="text-center"><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
+        <td class="text-center">
           <% if task.priority == 1 %>
             <%= t('view.todotasks.priority_high') %>
           <% elsif task.priority == 2 %>
@@ -57,11 +62,10 @@
 
           <% end %>
           </td>
-        <td><%= link_to t('view.show'), todotask_path(task.id) %></td>
-        <td><%= link_to t('view.edit'), edit_todotask_path(task.id) %></td>
-        <td><%= link_to t('view.delete'), todotask_path(task.id), method: :delete %></td>
+        <td class="text-center"><%= link_to t('view.show'), todotask_path(task.id), class:"btn btn-info" %></td>
+        <td class="text-center"><%= link_to t('view.edit'), edit_todotask_path(task.id), class:"btn btn-secondary" %></td>
+        <td class="text-center"><%= link_to t('view.delete'), todotask_path(task.id), method: :delete, class:"btn btn-danger" %></td>
       </tr>
   <% end %>
 </table>
-
-<%= paginate @todotasks %>
+<%= paginate @todotasks, class:"pagination" %>

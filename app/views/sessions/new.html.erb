@@ -1,10 +1,10 @@
-<h1>Login</h1>
-<%= form_with(scope: :session, url:sessions_path, local:true) do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<h2 class="col-md-8 col-xs-12 mx-auto">Login</h2>
+<%= form_with(scope: :session, url:sessions_path, local:true, class:"col-md-8 col-xs-12 mx-auto") do |f| %>
+  <%= f.label :email, class:"mt-4" %>
+  <%= f.text_field :email, class:"form-control" %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.label :password, class:"mt-4" %>
+  <%= f.password_field :password, class:"form-control" %>
 
-  <%= f.submit "Login" %>
+  <%= f.submit "Login", class:"d-block btn btn-primary mt-4 mx-auto" %>
 <% end %>
