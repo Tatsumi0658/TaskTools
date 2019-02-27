@@ -16,6 +16,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   before do
     User.create!(name: 'example', email:'example@example.com', password:'123456')
   end
+
   scenario "タスク作成のテスト" do
     #ログインページ来訪
     visit new_session_path
@@ -60,16 +61,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(Todotask.order("deadline desc").map(&:id)).to eq [12,11,13]
   end
 
-  scenario "ページネーションのテスト" do
-    Todotask.create!(name: "test04", content:"testtesttest4", status: 1, deadline:"2018-03-04 00:00:00", priority: 3)
-    Todotask.create!(name: "test05", content:"testtesttest5", status: 2, deadline:"2018-03-04 00:00:00", priority: 2)
-    Todotask.create!(name: "test06", content:"testtesttest6", status: 3, deadline:"2018-03-04 00:00:00", priority: 1)
-    visit todotasks_path
-    click_on 'Next'
-    expect(page).to have_content "Factoryで作ったデフォルトのタスク名2"
-    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
-  end
-
   scenario "タスク名、ステータス両方入力時の検索テスト" do
     visit todotasks_path
     fill_in 'タスク名', with: 'Factoryで作ったデフォルトのタスク名1'
@@ -104,4 +95,15 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on '優先度でソートする'
     expect(Todotask.order('priority asc').map(&:id)).to eq [22,23,24]
   end
+
+  scenario "ページネーションのテスト" do
+    Todotask.create!(name: "test04", content:"testtesttest4", status: 1, deadline:"2018-03-04 00:00:00", priority: 3)
+    Todotask.create!(name: "test05", content:"testtesttest5", status: 2, deadline:"2018-03-04 00:00:00", priority: 2)
+    Todotask.create!(name: "test06", content:"testtesttest6", status: 3, deadline:"2018-03-04 00:00:00", priority: 1)
+    visit todotasks_path
+    click_on 'Next'
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名2"
+    expect(page).to have_content "Factoryで作ったデフォルトのタスク名1"
+  end
+
 end

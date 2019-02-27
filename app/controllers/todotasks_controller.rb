@@ -3,16 +3,16 @@ class TodotasksController < ApplicationController
   def index
     if params[:todotask].present? && params[:todotask][:search_flag]
       if params[:todotask][:name] && params[:todotask][:status].blank?
-        @todotasks = Todotask.search_name(params[:todotask][:name])
+        @todotasks = Todotask.search_name(params[:todotask][:name]).page params[:page]
       elsif params[:todotask][:name].blank? && params[:todotask][:status]
-        @todotasks = Todotask.search_status(params[:todotask][:status])
+        @todotasks = Todotask.search_status(params[:todotask][:status]).page params[:page]
       elsif params[:todotask][:name] && params[:todotask][:status]
-        @todotasks = Todotask.search_name(params[:todotask][:name]).search_status(params[:todotask][:status])
+        @todotasks = Todotask.search_name(params[:todotask][:name]).search_status(params[:todotask][:status]).page params[:page]
       end
     elsif params[:sort_expired].present?
-      @todotasks = Todotask.all.order('deadline desc')
+      @todotasks = Todotask.all.order('deadline desc').page params[:page]
     elsif params[:priority_sort_expired].present?
-      @todotasks = Todotask.all.order('priority asc')
+      @todotasks = Todotask.all.order('priority asc').page params[:page]
     else
       @todotasks = Todotask.all.order('created_at desc').page params[:page]
     end
