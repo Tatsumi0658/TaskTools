@@ -17,8 +17,8 @@ class UsersController < ApplicationController
       redirect_to todotasks_path
       flash[:success] = t('.success')
     else
-      render :new
       flash[:danger] = t('.failed')
+      render :new
     end
   end
 

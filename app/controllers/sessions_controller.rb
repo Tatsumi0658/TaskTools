@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       redirect_to new_todotask_path
       flash[:success] = t('.success')
     else
-      render :new
       flash[:danger] = t('.failed')
+      render :new
     end
   end
 
