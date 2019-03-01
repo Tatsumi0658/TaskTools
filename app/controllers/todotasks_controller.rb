@@ -2,25 +2,25 @@ class TodotasksController < ApplicationController
   before_action :set_task, only:[:edit, :destroy, :show, :update]
 
   def index
-    unless current_user.present?
-      redirect_to new_session_path
-    end
-
-    @todotasks = Todotask.where(user_id: current_user.id)
-    if params[:todotask].present? && params[:todotask][:search_flag]
-      if params[:todotask][:name] && params[:todotask][:status].blank?
-        @todotasks = @todotasks.search_name(params[:todotask][:name]).page params[:page]
-      elsif params[:todotask][:name].blank? && params[:todotask][:status]
-        @todotasks = @todotasks.search_status(params[:todotask][:status]).page params[:page]
-      elsif params[:todotask][:name] && params[:todotask][:status]
-        @todotasks = @todotasks.search_name(params[:todotask][:name]).search_status(params[:todotask][:status]).page params[:page]
+    if current_user.present?
+      @todotasks = Todotask.where(user_id: current_user.id)
+      if params[:todotask].present? && params[:todotask][:search_flag]
+        if params[:todotask][:name] && params[:todotask][:status].blank?
+          @todotasks = @todotasks.search_name(params[:todotask][:name]).page params[:page]
+        elsif params[:todotask][:name].blank? && params[:todotask][:status]
+          @todotasks = @todotasks.search_status(params[:todotask][:status]).page params[:page]
+        elsif params[:todotask][:name] && params[:todotask][:status]
+          @todotasks = @todotasks.search_name(params[:todotask][:name]).search_status(params[:todotask][:status]).page params[:page]
+        end
+      elsif params[:sort_expired].present?
+        @todotasks = @todotasks.all.order('deadline desc').page params[:page]
+      elsif params[:priority_sort_expired].present?
+        @todotasks = @todotasks.all.order('priority asc').page params[:page]
+      else
+        @todotasks = @todotasks.all.order('created_at desc').page params[:page]
       end
-    elsif params[:sort_expired].present?
-      @todotasks = @todotasks.all.order('deadline desc').page params[:page]
-    elsif params[:priority_sort_expired].present?
-      @todotasks = @todotasks.all.order('priority asc').page params[:page]
-    else
-      @todotasks = @todotasks.all.order('created_at desc').page params[:page]
+    else 
+      redirect_to new_session_path
     end
   end
 

@@ -24,7 +24,7 @@ ja:
     users:
       new: ユーザー登録
       index: ユーザー一覧
-      show: ユーザー詳細
+      show: マイページ
       edit: ユーザー情報編集
     errors:
       name: タスク名
