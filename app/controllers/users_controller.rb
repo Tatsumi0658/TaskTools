@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only:[:edit, :update, :destroy, :show]
-
-  def index
-    @users = User.all
-  end
+  before_action :set_user, only:[:destroy, :show]
 
   def new
-    @user = User.new
+    if current_user.present?
+      redirect_to todotasks_path
+      flash[:danger] = "権限がありません"
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -20,19 +21,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def show
-  end
-
-  def update
-    if @user.update(set_user)
+    unless @user.id == current_user.id
       redirect_to todotasks_path
-      flash[:success] = t('.success')
-    else
-      render :edit
-      flash[:danger] = t('.failed')
+      flash[:danger] = "閲覧権限がありません"
     end
   end
 
