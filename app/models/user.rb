@@ -3,6 +3,6 @@ class User < ApplicationRecord
   validates :name, presence:true
   validates :email, presence: true, uniqueness: true, format:{ with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true
-  has_many :todotasks
+  has_many :todotasks, dependent: :destroy
   has_secure_password
 end
