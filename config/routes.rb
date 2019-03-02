@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :my_resources, concerns: :paginatable
 
-  namespace :admin do
+  namespace :admin, as: 'admin' do
     resources :users
   end
 end

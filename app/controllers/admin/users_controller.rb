@@ -13,7 +13,9 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to admin_users_path
+      flash[:success] = "ユーザー登録しました"
     else
+      flash[:danger] = "登録できませんでした"
       render :new
     end
   end
@@ -28,7 +30,9 @@ class Admin::UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to admin_users_path
+      flash[:success] = "更新しました"
     else
+      flash[:danger] = "失敗しました"
       render :edit
     end
   end
@@ -36,6 +40,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to admin_users_path
+    flash[:danger] = "削除しました"
   end
 
   private

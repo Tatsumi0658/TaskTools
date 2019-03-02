@@ -23,8 +23,11 @@ ja:
       search: 検索する
     users:
       new: ユーザー登録
-      index: ユーザー一覧
+      index: ユーザーリスト
       show: マイページ
       edit: ユーザー情報編集
+      name: ユーザー名
+      id: ID
+      count: タスク数
     errors:
       name: タスク名

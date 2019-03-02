@@ -1,10 +1,11 @@
-<h2><%= t('view.todotasks.index') %></h2>
+<h2><%= t('view.users.index') %></h2>
+<%= link_to t('view.users.new'), new_admin_user_path %>
 <table class="table mt-5">
   <thead class="thead-dark text-center">
     <tr>
-      <th><%= t('view.todotasks.deadline') %></th>
-      <th><%= t('view.todotasks.author') %></th>
-      <th><%= t('view.todotasks.author') %></th>
+      <th><%= t('view.users.id') %></th>
+      <th><%= t('view.users.name') %></th>
+      <th><%= t('view.users.count') %></th>
       <th><%= t('view.show') %></th>
       <th><%= t('view.edit') %></th>
       <th><%= t('view.delete') %></th>
