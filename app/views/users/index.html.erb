@@ -1,6 +1,0 @@
-<h1><%= t('view.users.index') %></h1>
-<% @users.each do |u| %>
-  <%= u.name %>
-  <%= link_to t('view.edit'), edit_user_path(u.id) %>
-  <%= link_to t('view.delete'), user_path(u.id), method: :delete %>
-<% end %>
