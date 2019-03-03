@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only:[:show, :destroy, :edit, :update]
+  before_action :check_admin
 
   def index
     @users = User.all.includes(:todotasks)
@@ -52,4 +53,12 @@ class Admin::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def check_admin
+    unless current_user.admin_flag?
+      redirect_to todotasks_path
+      flash[:danger] = "権限がありません"
+    end
+  end
+  
 end
