@@ -5,4 +5,24 @@ class User < ApplicationRecord
   validates :password, presence: true
   has_many :todotasks, dependent: :destroy
   has_secure_password
+  before_update :user_should_have_at_least_one_login_update
+  before_destroy :user_should_have_at_least_one_login_delete
+
+  private
+
+  def user_should_have_at_least_one_login_delete
+    # もしユーザーのLoginProviderが1つしか無いのに、消そうとしていたら
+    if User.where(admin_flag: true).count == 1 && self.admin_flag == true
+      throw :abort
+    end
+  end
+
+  def user_should_have_at_least_one_login_update
+    # もしユーザーのLoginProviderが1つしか無いのに、消そうとしていたら
+    if User.where(admin_flag: true).count == 1 && self.admin_flag == false
+      throw :abort
+    end
+  end
+
+
 end
