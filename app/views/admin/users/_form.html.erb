@@ -17,5 +17,8 @@
   <%= f.label :password_confirmation, class:"mt-4" %>
   <%= f.password_field :password_confirmation, class:"form-control" %>
 
+  <%= f.label :admin_flag, class:"mt-4" %>
+  <%= f.select :admin_flag,[["一般", false], ["管理者", true]], {}, class:"form-control" %>
+
   <%= f.submit class:"d-block btn btn-primary mt-4 mx-auto" %>
 <% end %>

@@ -47,7 +47,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin_flag)
   end
 
   def set_user
@@ -60,5 +60,5 @@ class Admin::UsersController < ApplicationController
       flash[:danger] = "権限がありません"
     end
   end
-  
+
 end
