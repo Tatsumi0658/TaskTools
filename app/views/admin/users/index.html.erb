@@ -9,6 +9,7 @@
       <th><%= t('view.show') %></th>
       <th><%= t('view.edit') %></th>
       <th><%= t('view.delete') %></th>
+      <th>権限</th>
     </tr>
   </thead>
   <% @users.each do |user| %>
@@ -19,6 +20,13 @@
     <td class="text-center"><%= link_to t('view.show'), admin_user_path(id: user.id), class:"btn btn-info" %></td>
     <td class="text-center"><%= link_to t('view.edit'), edit_admin_user_path(id: user.id), class:"btn btn-secondary" %></td>
     <td class="text-center"><%= link_to t('view.delete'), admin_user_path(id: user.id), method: :delete, class:"btn btn-danger" %></td>
+    <td class="text-center">
+      <% if user.admin_flag? %>
+        管理者
+      <% else %>
+        一般
+      <% end %>
+    </td>
   </tr>
   <% end %>
 </table>
