@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only:[:show, :destroy, :edit, :update]
   before_action :check_admin
-  before_action :check, only:[:create, :update, :destroy]
+  #before_action :check, only:[:create, :update, :destroy]
 
   def index
     @users = User.all.includes(:todotasks)
@@ -62,11 +62,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def check
-    true_user = User.where(admin_flag: true).count
-    if true_user == 1 && params[:user].present? && params[:user][:admin_flag].blank?
-      redirect_to admin_users_path
-    end
-  end
+  #def check
+  #  true_user = User.where(admin_flag: true).count
+  #  if true_user == 1 && params[:user].present? && params[:user][:admin_flag].blank?
+  #    redirect_to admin_users_path
+  #  end
+  #end
 
 end
