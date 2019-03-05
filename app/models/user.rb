@@ -2,9 +2,9 @@ class User < ApplicationRecord
   before_validation { email.downcase! }
   validates :name, presence:true
   validates :email, presence: true, uniqueness: true, format:{ with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  has_secure_password
   validates :password, presence: true
   has_many :todotasks, dependent: :destroy
-  has_secure_password
   before_update :user_should_have_at_least_one_login_update
   before_destroy :user_should_have_at_least_one_login_delete
 
