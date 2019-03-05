@@ -19,13 +19,14 @@ class TodotasksController < ApplicationController
       else
         @todotasks = @todotasks.all.order('created_at desc').page params[:page]
       end
-    else 
+    else
       redirect_to new_session_path
     end
   end
 
   def new
     @todotask = Todotask.new
+    @todotask.labels.build
   end
 
   def create
@@ -69,6 +70,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority)
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, labels_attributes:[id:[], name:[]])
   end
 end
