@@ -20,10 +20,9 @@
   <%= f.label :priority, class:"mt-4" %>
   <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]], {}, class:"form-control" %>
 
-  <% %w(営業 サポート).each.with_index do |name, i| %>
-    <%= f.fields_for :labels do |label_f| %>
-      <%= label_f.check_box 'labels_attributes[name]', name, false, id:"#{i}" %>
-      <%= name %>
+  <%= f.fields_for :labels do |label_f| %>
+    <%= label_f.collection_check_boxes :label_ids, @labels, :id, :name, include_hidden: false do |b| %>
+      <%= b.label { b.check_box + b.name } %>
     <% end %>
   <% end %>
   <br />
