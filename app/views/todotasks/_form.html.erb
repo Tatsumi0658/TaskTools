@@ -20,11 +20,11 @@
   <%= f.label :priority, class:"mt-4" %>
   <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]], {}, class:"form-control" %>
 
-  <%= f.fields_for :labels do |label_f| %>
-    <%= f.collection_check_boxes :label_ids, @labels, :id, :name, include_hidden: false do |b| %>
-      <%= b.label { b.check_box + b.text } %>
-    <% end %>
+  <% @labels.each do |label| %>
+    <%= f.check_box :label_ids, { multiple:true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+    <%= label.name %>
   <% end %>
+
   <br />
   <%= f.submit class:"mt-4 btn btn-primary" %>
 <% end %>
