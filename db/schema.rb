@@ -17,10 +17,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_190114) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "todotask_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["todotask_id"], name: "index_labels_on_todotask_id"
   end
 
   create_table "todotasks", force: :cascade do |t|
@@ -47,6 +45,5 @@ ActiveRecord::Schema.define(version: 2019_03_02_190114) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "labels", "todotasks"
   add_foreign_key "todotasks", "users"
 end
