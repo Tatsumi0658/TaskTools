@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def user_should_have_at_least_one_login_delete
     # もしユーザーのLoginProviderが1つしか無いのに、消そうとしていたら
-    if User.where(admin_flag: true).count == 1 && self.admin_flag == true
+    if User.where(admin_flag: true).count == 1 && self.admin_flag?
       throw :abort
     end
   end
