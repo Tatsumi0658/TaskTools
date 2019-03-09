@@ -5,5 +5,5 @@ class Todotask < ApplicationRecord
   scope :search_status, -> (status){ where(status: status) }
   paginates_per 3
   has_many :task_labels, dependent: :destroy
-  has_many :label_task_labels, through: :task_label, source: :label
+  has_many :labels, through: :task_labels
 end

@@ -43,9 +43,11 @@ class TodotasksController < ApplicationController
   end
 
   def edit
+    @labels = Label.all
   end
 
   def show
+    @tasklabels = TaskLabel.where(todotask_id: @todotask.id).all
   end
 
   def update
@@ -70,6 +72,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, { label_ids: [] })
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, label_ids: [])
   end
 end
