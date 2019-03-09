@@ -1,3 +1,4 @@
 class Label < ApplicationRecord
-  belongs_to :todotask
+  has_many :task_labels, dependent: :destroy
+  has_many :todotasks, through: :task_labels
 end

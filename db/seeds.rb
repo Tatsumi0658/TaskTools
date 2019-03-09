@@ -5,13 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-1.times do |n|
-  name = Faker::Pokemon.name
-  email = Faker::Internet.email
-  password = "password"
-  User.create!(name: name,
-               email: email,
-               password: password,
-               password_confirmation: password,
-             )
-end
+%w[営業 サポート 社内整備 技術 そのほか].each { |a| Label.create(name: a) }

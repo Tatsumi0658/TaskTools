@@ -5,12 +5,29 @@ class TodotasksController < ApplicationController
     if current_user.present?
       @todotasks = Todotask.where(user_id: current_user.id)
       if params[:todotask].present? && params[:todotask][:search_flag]
-        if params[:todotask][:name] && params[:todotask][:status].blank?
-          @todotasks = @todotasks.search_name(params[:todotask][:name]).page params[:page]
-        elsif params[:todotask][:name].blank? && params[:todotask][:status]
-          @todotasks = @todotasks.search_status(params[:todotask][:status]).page params[:page]
-        elsif params[:todotask][:name] && params[:todotask][:status]
+        if params[:todotask][:name].present? && params[:todotask][:status].present? && params[:todotask][:label_ids].present?
+          label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
+          @todotasks = @todotasks.search_name(params[:todotask][:name]).search_status(params[:todotask][:status])
+          @todotasks = @todotasks.where(id: label).page params[:page]
+        elsif params[:todotask][:name].present? && params[:todotask][:status].present?
           @todotasks = @todotasks.search_name(params[:todotask][:name]).search_status(params[:todotask][:status]).page params[:page]
+        elsif params[:todotask][:status].present? && params[:todotask][:label_ids].present?
+          label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
+          @todotasks = @todotasks.search_status(params[:todotask][:status])
+          @todotasks = @todotasks.where(id: label).page params[:page]
+        elsif params[:todotask][:name].present? && params[:todotask][:label_ids].present?
+          label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
+          @todotasks = @todotasks.search_name(params[:todotask][:name])
+          @todotasks = @todotasks.where(id: label).page params[:page]
+        elsif params[:todotask][:name].present?
+          @todotasks = @todotasks.search_name(params[:todotask][:name]).page params[:page]
+        elsif params[:todotask][:status].present?
+          @todotasks = @todotasks.search_status(params[:todotask][:status]).page params[:page]
+        elsif params[:todotask][:label_ids].present?
+          label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
+          @todotasks = @todotasks.where(id: label).page params[:page]
+        else
+          redirect_to todotasks_path
         end
       elsif params[:sort_expired].present?
         @todotasks = @todotasks.all.order('deadline desc').page params[:page]
@@ -19,13 +36,15 @@ class TodotasksController < ApplicationController
       else
         @todotasks = @todotasks.all.order('created_at desc').page params[:page]
       end
-    else 
+    else
       redirect_to new_session_path
     end
+    @labels = Label.all
   end
 
   def new
     @todotask = Todotask.new
+    @labels = Label.all
   end
 
   def create
@@ -42,9 +61,11 @@ class TodotasksController < ApplicationController
   end
 
   def edit
+    @labels = Label.all
   end
 
   def show
+    @tasklabels = TaskLabel.where(todotask_id: @todotask.id).all
   end
 
   def update
@@ -69,6 +90,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority)
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, label_ids: [])
   end
 end

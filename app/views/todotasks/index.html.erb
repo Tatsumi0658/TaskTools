@@ -8,6 +8,9 @@
   <%= f.label :status, class:"mr-2" %>
   <%= f.select :status,[["未着手",1], ["着手", 2], ["完了", 3]], { include_blank: true }, class:"form-control col-md-2 col-xs-12 mb-2 mr-sm-2" %>
 
+  <%= f.label :label_ids, t('view.todotasks.label'),class:"mr-2" %>
+  <%= f.select :label_ids, @labels.map{|t| [t.name, t.id]}, { include_blank: true }, class:"form-control col-md-2 col-xs-12 mb-2 mr-sm-2" %>
+
   <%= f.hidden_field :search_flag, value: "true" %>
 
   <%= f.submit t('view.todotasks.search'), class:"btn btn-primary mb-2" %>
