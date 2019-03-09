@@ -21,6 +21,7 @@ ja:
       priority_middle: 中
       priority_low: 低
       search: 検索する
+      label: ラベル
     users:
       new: ユーザー登録
       index: ユーザーリスト

@@ -1,12 +1,13 @@
 <h2><%= t('view.todotasks.show') %></h2>
 <h4 class="mt-5"><%= t('view.todotasks.name') %></h4>
-<P>
-  <% @tasklabels.each do |label| %>
-    <%= label.label.name %>
-  <% end %>
-  </P>
 <p class="form-control"><%= @todotask.name %></p>
-<h4><%= t('view.todotasks.content') %></h4>
+<h4 class="mt-4"><%= t('view.todotasks.label') %></h4>
+<p>
+  <% @tasklabels.each do |label| %>
+    <button class="btn btn-light"><%= label.label.name %></button>
+  <% end %>
+</p>
+<h4 class="mt-4"><%= t('view.todotasks.content') %></h4>
 <p class="from-control"><%= @todotask.content %></p>
 <h4><%= t('view.todotasks.deadline') %></h4>
 <p class="form-control"><%= @todotask.deadline.year %>-<%= @todotask.deadline.month %>-<%= @todotask.deadline.day %></p>
