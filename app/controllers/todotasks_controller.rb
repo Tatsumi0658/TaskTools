@@ -5,7 +5,6 @@ class TodotasksController < ApplicationController
     if current_user.present?
       @todotasks = Todotask.where(user_id: current_user.id)
       if params[:todotask].present? && params[:todotask][:search_flag]
-        task_select(params[:todotask][:name], params[:todotask][:status], params[:todotask][:label_ids])
         if params[:todotask][:name].present? && params[:todotask][:status].present? && params[:todotask][:label_ids].present?
           label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
           @todotasks = @todotasks.search_name(params[:todotask][:name]).search_status(params[:todotask][:status])
@@ -27,6 +26,8 @@ class TodotasksController < ApplicationController
         elsif params[:todotask][:label_ids].present?
           label = TaskLabel.where(label_id: params[:todotask][:label_ids]).pluck(:todotask_id)
           @todotasks = @todotasks.where(id: label).page params[:page]
+        else
+          redirect_to todotasks_path
         end
       elsif params[:sort_expired].present?
         @todotasks = @todotasks.all.order('deadline desc').page params[:page]

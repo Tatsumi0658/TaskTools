@@ -22,6 +22,7 @@ ja:
       priority_low: 低
       search: 検索する
       label: ラベル
+      label_ids: ラベル一覧
     users:
       new: ユーザー登録
       index: ユーザーリスト

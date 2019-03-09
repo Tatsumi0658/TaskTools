@@ -20,6 +20,7 @@
   <%= f.label :priority, class:"mt-4" %>
   <%= f.select :priority,[["高", 1], ["中", 2], ["低", 3]], {}, class:"form-control" %>
 
+  <%= f.label :label_ids, t('view.todotasks.label'), class:"mt-4" %><br />
   <% @labels.each do |label| %>
     <%= f.check_box :label_ids, { multiple:true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
     <%= label.name %>
