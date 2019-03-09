@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 %w[営業 サポート 社内整備 技術 そのほか].each { |a| Label.create(name: a) }
-User.create(id: 2, name: "sample", email: "sample@sample.com", password: "password", password_confirmation: "password", created_at: nil, updated_at: nil, admin_flag: "true")
+User.create(id: 2, name: "sample", email: "sample@sample.com", password_digest: "password", created_at: nil, updated_at: nil, admin_flag: true)
