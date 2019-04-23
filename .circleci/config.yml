@@ -5,6 +5,7 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/Task
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.5.3-node-browsers
@@ -18,8 +19,6 @@ jobs:
         environment:
           POSTGRES_USER=ubuntu
           POSTGRES_DB=Task_test
-
-    working_directory: ~/Task
 
     steps:
       - checkout
