@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "adminuser機能", type: :feature do
   before do
     visit new_session_path
-    ill_in "メールアドレス", with:"aaa@aaa.com"
+    fill_in "メールアドレス", with:"aaa@aaa.com"
     fill_in "パスワード", with:"aaaaaa"
     click_button "Login"
   end
