@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2.1
+version: 2
 jobs:
   build:
     working_directory: ~/Task
@@ -56,12 +56,12 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: Set up DB
+          name: Database setup
           command: |
-            bundle exec rake db:create db:schema:load --trace
+            bundle exec rake db:create db:schema:load --trace &&
             bundle exec rake db:migrate
-        environment:
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/Task_test"
+          environment:
+            DATABASE_URL: "postgres://ubuntu@localhost:5432/deptaskapp_test"
 
       #- run: bundle exec rake db:create
       #- run: bundle exec rake db:schema:load
