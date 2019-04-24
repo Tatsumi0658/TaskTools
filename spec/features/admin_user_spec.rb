@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "adminuser機能", type: :feature do
+  before do
+    User.create!(name: "owner", email: "owner@test.com", password: "testtest", admin_flag: true)
+  end
   scenario "登録" do
     visit admin_users_path
     find(".btn-success").click
