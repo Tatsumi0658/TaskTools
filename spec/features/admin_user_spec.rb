@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "adminuser機能", type: :feature do
   before do
+    User.create!(name: "aaa", email: "aaa@aaa.com", password: "aaaaaa", admin_flag: true)
     visit new_session_path
     fill_in "メールアドレス", with:"aaa@aaa.com"
     fill_in "パスワード", with:"aaaaaa"
