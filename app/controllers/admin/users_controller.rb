@@ -59,7 +59,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def check_admin
-    unless current_user.nil? || current_user.admin_flag?
+    unless current_user.present? && current_user.admin_flag?
       redirect_to todotasks_path
       flash[:danger] = "権限がありません"
     end
