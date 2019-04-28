@@ -40,6 +40,9 @@ class TodotasksController < ApplicationController
       redirect_to new_session_path
     end
     @labels = Label.all
+
+    @warntasks = Todotask.where(user_id: current_user.id).where(status: 1).order("deadline asc")
+    @time = Time.current
   end
 
   def new

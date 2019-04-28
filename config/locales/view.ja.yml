@@ -23,6 +23,10 @@ ja:
       search: 検索する
       label: ラベル
       label_ids: ラベル一覧
+      left: 残
+      days: 日
+      expired: 期限切れ
+      daysleft: 残日数
     users:
       new: ユーザー登録
       index: ユーザーリスト
