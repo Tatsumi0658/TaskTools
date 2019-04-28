@@ -41,8 +41,14 @@ class TodotasksController < ApplicationController
     end
     @labels = Label.all
 
-    @warntasks = Todotask.where(user_id: current_user.id).where(status: 1).order("deadline asc")
+    @warntasks = Todotask.where(user_id: current_user.id).where(status: 1..2).order("deadline asc")
     @time = Time.current
+    @count = 0
+    @warntasks.each do |warn|
+      if ( (warn.deadline - @time) / (24*60*60) ) <= 1
+        @count = +1
+      end
+    end
   end
 
   def new

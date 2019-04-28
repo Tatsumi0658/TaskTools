@@ -17,72 +17,77 @@
 <% end %>
 <div class="alert alert-dark">
 期限間近タスク一覧
-<table class="table mt-4">
-  <thead class="thead-dark text-center">
-    <tr>
-      <th><%= t('view.todotasks.name') %></th>
-      <th><%= t('view.todotasks.content') %></th>
-      <th><%= t('view.todotasks.status') %></th>
-      <th><%= t('view.todotasks.deadline') %></th>
-      <th><%= t('view.todotasks.priority') %></th>
-      <th><%= t('view.todotasks.author') %></th>
-      <th><%= t('view.show') %></th>
-      <th><%= t('view.edit') %></th>
-      <th><%= t('view.delete') %></th>
-      <th><%= t('view.todotasks.daysleft') %></th>
-    </tr>
-  </thead>
-    <% @warntasks.each do |warn| %>
-      <% if ( (warn.deadline - @time) / (24*60*60) ) <= 1 %>
-        <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
-        <tr class="bg-danger text-white">
-        <% elsif (((warn.deadline - @time) / (24*60*60)).floor + 1) <= 2 %>
-        <tr class="bg-warning">
-        <% else %>
-        <tr>
-        <% end %>
-          <td><%= warn.name %></td>
-          <td><%= warn.content %></td>
-          <td class="text-center">
-            <% if warn.status == 1 %>
-              <%= t('view.todotasks.status_1') %>
-            <% elsif warn.status == 2 %>
-              <%= t('view.todotasks.status_2') %>
-            <% else %>
-              <%= t('view.todotasks.status_3') %>
-            <% end %>
-          </td>
-          <td class="text-center"><%= warn.deadline.year %>-<%= warn.deadline.month %>-<%= warn.deadline.day %></td>
-          <td class="text-center">
-            <% if warn.priority == 1 %>
-              <%= t('view.todotasks.priority_high') %>
-            <% elsif warn.priority == 2 %>
-              <%= t('view.todotasks.priority_middle') %>
-            <% else %>
-              <%= t('view.todotasks.priority_low') %>
-            <% end %>
-          </td>
-          <td><%= warn.user.name %></td>
-          <td class="text-center"><%= link_to t('view.show'), todotask_path(warn.id), class:"btn btn-info" %></td>
-          <td class="text-center"><%= link_to t('view.edit'), edit_todotask_path(warn.id), class:"btn btn-secondary" %></td>
-          <td class="text-center">
-            <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
-              <%= link_to t('view.delete'), todotask_path(warn.id), method: :delete, class:"btn btn-light text-danger" %>
-            <% else %>
-              <%= link_to t('view.delete'), todotask_path(warn.id), method: :delete, class:"btn btn-danger" %>
-            <% end %>
-          </td>
-          <td class="text-center">
-            <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
-            <%= t('view.todotasks.expired') %>
-            <% else %>
-            <%= t('view.todotasks.left') %><%=(((warn.deadline - @time) / (24*60*60)).floor + 1) %><%= t('view.todotasks.days') %>
-            <% end %>
-          </td>
-        </tr>
+<% if @count == 0 %>
+<br />
+期限が近いタスクはありません
+<% else %>
+  <table class="table mt-4">
+    <thead class="thead-dark text-center">
+      <tr>
+        <th><%= t('view.todotasks.name') %></th>
+        <th><%= t('view.todotasks.content') %></th>
+        <th><%= t('view.todotasks.status') %></th>
+        <th><%= t('view.todotasks.deadline') %></th>
+        <th><%= t('view.todotasks.priority') %></th>
+        <th><%= t('view.todotasks.author') %></th>
+        <th><%= t('view.show') %></th>
+        <th><%= t('view.edit') %></th>
+        <th><%= t('view.delete') %></th>
+        <th><%= t('view.todotasks.daysleft') %></th>
+      </tr>
+    </thead>
+      <% @warntasks.each do |warn| %>
+        <% if ( (warn.deadline - @time) / (24*60*60) ) <= 1 %>
+          <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
+          <tr class="bg-danger text-white">
+          <% elsif (((warn.deadline - @time) / (24*60*60)).floor + 1) <= 2 %>
+          <tr class="bg-warning">
+          <% else %>
+          <tr>
+          <% end %>
+            <td><%= warn.name %></td>
+            <td><%= warn.content %></td>
+            <td class="text-center">
+              <% if warn.status == 1 %>
+                <%= t('view.todotasks.status_1') %>
+              <% elsif warn.status == 2 %>
+                <%= t('view.todotasks.status_2') %>
+              <% else %>
+                <%= t('view.todotasks.status_3') %>
+              <% end %>
+            </td>
+            <td class="text-center"><%= warn.deadline.year %>-<%= warn.deadline.month %>-<%= warn.deadline.day %></td>
+            <td class="text-center">
+              <% if warn.priority == 1 %>
+                <%= t('view.todotasks.priority_high') %>
+              <% elsif warn.priority == 2 %>
+                <%= t('view.todotasks.priority_middle') %>
+              <% else %>
+                <%= t('view.todotasks.priority_low') %>
+              <% end %>
+            </td>
+            <td><%= warn.user.name %></td>
+            <td class="text-center"><%= link_to t('view.show'), todotask_path(warn.id), class:"btn btn-info" %></td>
+            <td class="text-center"><%= link_to t('view.edit'), edit_todotask_path(warn.id), class:"btn btn-secondary" %></td>
+            <td class="text-center">
+              <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
+                <%= link_to t('view.delete'), todotask_path(warn.id), method: :delete, class:"btn btn-light text-danger" %>
+              <% else %>
+                <%= link_to t('view.delete'), todotask_path(warn.id), method: :delete, class:"btn btn-danger" %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if (((warn.deadline - @time) / (24*60*60)).floor + 1) < 0 %>
+              <%= t('view.todotasks.expired') %>
+              <% else %>
+              <%= t('view.todotasks.left') %><%=(((warn.deadline - @time) / (24*60*60)).floor + 1) %><%= t('view.todotasks.days') %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
     <% end %>
-  <% end %>
-</table>
+  </table>
+<% end %>
 </div>
 <table class="table mt-5">
   <thead class="thead-light text-center">
