@@ -27,6 +27,8 @@ ja:
       days: 日
       expired: 期限切れ
       daysleft: 残日数
+      read: 既読
+      noread: 未読
     users:
       new: ユーザー登録
       index: ユーザーリスト

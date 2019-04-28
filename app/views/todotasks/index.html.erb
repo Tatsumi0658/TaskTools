@@ -34,6 +34,7 @@
         <th><%= t('view.edit') %></th>
         <th><%= t('view.delete') %></th>
         <th><%= t('view.todotasks.daysleft') %></th>
+        <th></th>
       </tr>
     </thead>
       <% @warntasks.each do |warn| %>
@@ -81,6 +82,13 @@
               <%= t('view.todotasks.expired') %>
               <% else %>
               <%= t('view.todotasks.left') %><%=(((warn.deadline - @time) / (24*60*60)).floor + 1) %><%= t('view.todotasks.days') %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if warn.read == true %>
+                <%= t('view.todotasks.read') %>
+              <% else %>
+                <%= t('view.todotasks.noread') %>
               <% end %>
             </td>
           </tr>

@@ -75,6 +75,8 @@ class TodotasksController < ApplicationController
 
   def show
     @tasklabels = TaskLabel.where(todotask_id: @todotask.id).all
+    @todotask.read = true
+    @todotask.save
   end
 
   def update
