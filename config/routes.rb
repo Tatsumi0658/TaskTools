@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   end
 
   resources :groups
+  resources :usergroups, only:[:create, :destroy]
 end

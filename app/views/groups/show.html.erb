@@ -1,2 +1,9 @@
 <h1>Groups#show</h1>
 <p>Find me in app/views/groups/show.html.erb</p>
+<%= @group.name %>
+
+<% unless @group.owner_id == current_user.id %>
+  <% if @usergroup.present? %>
+    <%= link_to "退出する", usergroup_path(id: @usergroup.id), method: :delete, class:"btn btn-danger" %>
+  <% end %>
+<% end %>

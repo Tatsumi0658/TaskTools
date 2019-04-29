@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.all
+    @usergroups = Usergroup.all
   end
 
   def new
@@ -20,6 +21,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @usergroup = current_user.usergroups.find_by(group_id: @group.id)
   end
 
   def edit

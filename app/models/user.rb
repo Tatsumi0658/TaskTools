@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :password, presence: true
   has_many :todotasks, dependent: :destroy
   has_many :usergroups, dependent: :destroy
+  has_many :usergroup_groups, through: :usergroups, source: :group
   before_update :user_should_have_at_least_one_login_update
   before_destroy :user_should_have_at_least_one_login_delete
 
