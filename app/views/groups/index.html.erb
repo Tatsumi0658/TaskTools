@@ -3,4 +3,7 @@
 <% @groups.each do |group| %>
   <%= group.name %>
   <%= group.owner_id %>
+  <%= link_to "詳細", group_path(group.id), class: "btn btn-info" %>
+  <%= link_to "編集", edit_group_path(group.id), class: "btn btn-light" %>
+  <%= link_to "削除", group_path(group.id), method: :delete, class: "btn btn-danger" %> 
 <% end %>
