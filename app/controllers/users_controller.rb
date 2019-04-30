@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def new
     if current_user.present?
       redirect_to todotasks_path
-      flash[:danger] = "権限がありません"
+      flash[:danger] = t('.failed')
     else
       @user = User.new
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def show
     unless @user.id == current_user.id
       redirect_to todotasks_path
-      flash[:danger] = "閲覧権限がありません"
+      flash[:danger] = t('.failed')
     end
   end
 

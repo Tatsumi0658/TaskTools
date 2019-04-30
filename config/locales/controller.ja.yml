@@ -12,10 +12,15 @@ ja:
       failed: 失敗しました
     destroy:
       success: 削除しました
+      failed: 削除権限がありません
   users:
+    new:
+      failed: 権限がありません
     create:
       success: ユーザーを作成しました
       failed: 作成できませんでした
+    show:
+      failed: 権限がありません
     update:
       success: 更新しました
       failed: 失敗しました

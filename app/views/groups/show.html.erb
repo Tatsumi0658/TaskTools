@@ -13,6 +13,8 @@
       <th><%= t('view.todotasks.author') %></th>
       <th><%= t('view.todotasks.status') %></th>
       <th><%= t('view.todotasks.deadline') %></th>
+      <th><%= t('view.todotasks.daysleft') %></th>
+      <th></th>
     </tr>
   </thead>
   <% @users.each do |user| %>
@@ -32,6 +34,14 @@
           <% end %>
         </td>
         <td class="text-center"><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
+        <td class="text-center"><%= link_to t('view.show'), todotask_path(task.id), class:"btn btn-info" %></td>
+        <td class="text-center">
+          <% if task.read == true %>
+            <%= t('view.todotasks.read') %>
+          <% else %>
+            <%= t('view.todotasks.noread') %>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     <% end %>

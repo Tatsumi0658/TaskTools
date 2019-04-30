@@ -77,22 +77,36 @@ class TodotasksController < ApplicationController
 
   def show
     @tasklabels = TaskLabel.where(todotask_id: @todotask.id).all
+    if current_user.id == @todotask.user_id
+      @todotask.read = true
+      @todotask.save
+    end
   end
 
   def update
-    if @todotask.update(todotask_params)
-      redirect_to todotasks_path
-      flash[:success] = t('.success')
+    if @todotask.user_id == current_user.id
+      if @todotask.update(todotask_params)
+        redirect_to todotasks_path
+        flash[:success] = t('.success')
+      else
+        render :edit
+        flash[:danger] = t('.failed')
+      end
     else
-      render :edit
+      redirect_to todotask_path(@todotask.id)
       flash[:danger] = t('.failed')
     end
   end
 
   def destroy
-    @todotask.destroy
-    redirect_to todotasks_path
-    flash[:danger] = t('.success')
+    if @todotask.user_id == current_user.id
+      @todotask.destroy
+      redirect_to todotasks_path
+      flash[:danger] = t('.success')
+    else
+      redirect_to todotask_path(@todotask.id)
+      flash[:danger] = t('.failed')
+    end
   end
 
   private
