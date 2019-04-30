@@ -25,6 +25,9 @@
     <%= f.check_box :label_ids, { multiple:true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
     <%= label.name %>
   <% end %>
+  <br />
+  <%= f.label :uploadfile, class:"mt-4" %>
+  <%= f.file_field :uploadfile %>
 
   <br />
   <%= f.submit class:"mt-4 btn btn-primary" %>

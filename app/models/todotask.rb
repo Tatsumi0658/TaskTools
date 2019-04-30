@@ -7,4 +7,5 @@ class Todotask < ApplicationRecord
   has_many :task_labels, dependent: :destroy
   has_many :labels, through: :task_labels
 
+  mount_uploader :uploadfile, UploadfileUploader
 end

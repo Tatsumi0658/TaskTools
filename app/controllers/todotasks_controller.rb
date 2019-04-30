@@ -115,6 +115,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, label_ids: [])
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, :uploadfile ,label_ids: [])
   end
 end

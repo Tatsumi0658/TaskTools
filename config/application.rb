@@ -15,6 +15,8 @@ module Task
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :local
 
+    config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
+
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,

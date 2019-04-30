@@ -31,5 +31,7 @@
     <%= t('view.todotasks.priority_low') %>
   <% end %>
 </p>
+<%= link_to @todotask.uploadfile_identifier, @todotask.uploadfile.url %>
+<br />
 <%= link_to t('view.edit'), edit_todotask_path(@todotask.id), class:"btn btn-secondary" %>
 <%= link_to t('view.delete'), todotask_path(@todotask.id), method: :delete, class:"btn btn-danger" %>
