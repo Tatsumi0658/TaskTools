@@ -37,3 +37,11 @@ ja:
       count: タスク数
     errors:
       name: タスク名
+    groups:
+      new: グループ作成
+      edit: グループ編集
+      index: グループ一覧
+      show: グループ詳細
+      delete: 退出する
+      name: グループ名
+      participate: 参加する

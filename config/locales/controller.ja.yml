@@ -21,3 +21,17 @@ ja:
       failed: 失敗しました
     destroy:
       success: 削除しました
+  groups:
+    create:
+      success: グループを作成しました
+    show:
+      failed: 権限がありません
+    update:
+      success: 更新しました
+    destroy:
+      success: 削除しました
+  usergroups:
+    create:
+      failed: 登録済みです
+    destroy:
+      failed: グループオーナーは退出できません

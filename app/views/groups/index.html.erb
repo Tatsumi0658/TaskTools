@@ -1,25 +1,27 @@
-<h1>Groups#index</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
-<table>
-  <thead>
+<h2><%= t('view.groups.index') %></h2>
+<table class="table mt-5">
+  <thead class="thead-dark text-center">
     <tr>
-      <th>グループ名</th>
-      <th>詳細</th>
-      <th>編集</th>
-      <th>参加</th>
+      <th><%= t('view.groups.name') %></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 <% @groups.each do |group| %>
 <tr>
   <td><%= group.name %></td>
-  <% if current_user.id == group.owner_id %>
-    <td><%= link_to "編集", edit_group_path(group.id), class: "btn btn-light" %></td>
-    <td><%= link_to "削除", group_path(group.id), method: :delete, class: "btn btn-danger" %></td>
-  <% end %>
   <% if current_user.usergroups.find_by(group_id: group.id) %>
-    <td><%= link_to "詳細", group_path(group.id), class: "btn btn-info" %></td>
+    <td class="text-center"><%= link_to t('view.show'), group_path(group.id), class: "btn btn-info" %></td>
   <% else %>
-    <td><%= link_to "参加する", usergroups_path(group_id: group.id), method: :post, class:"btn btn-primary" %></td>
+    <td class="text-center"><%= link_to t('view.groups.participate'), usergroups_path(group_id: group.id), method: :post, class:"btn btn-primary" %></td>
+  <% end %>
+  <% if current_user.id == group.owner_id %>
+    <td class="text-center"><%= link_to t('view.edit'), edit_group_path(group.id), class: "btn btn-light" %></td>
+    <td class="text-center"><%= link_to t('view.delete'), group_path(group.id), method: :delete, class: "btn btn-danger" %></td>
+  <% else %>
+    <td></td>
+    <td></td>
   <% end %>
 <% end %>
 </tr>

@@ -2,7 +2,7 @@ class UsergroupsController < ApplicationController
   def create
     if Usergroup.where(user_id: current_user.id).where(group_id: params[:group_id]).present?
       redirect_to groups_path
-      flash[:danger] = "登録済みです"
+      flash[:danger] = t('.failed')
     else
       usergroup = current_user.usergroups.create(group_id: params[:group_id])
       redirect_to groups_path
@@ -16,7 +16,7 @@ class UsergroupsController < ApplicationController
         redirect_to groups_path
       else
         redirect_to groups_path
-        flash[:danger] = "グループオーナーは退出できません"
+        flash[:danger] = t('.failed')
       end
     else
       usergroup = current_user.usergroups.find_by(id: params[:id]).destroy

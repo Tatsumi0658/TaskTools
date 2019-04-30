@@ -1,9 +1,39 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
-<%= @group.name %>
-
-<% unless @group.owner_id == current_user.id %>
-  <% if @usergroup.present? %>
-    <%= link_to "退出する", usergroup_path(id: @usergroup.id), method: :delete, class:"btn btn-danger" %>
-  <% end %>
+<h2><%= @group.name %></h2>
+<% if @group.owner_id != current_user.id && @usergroup.present? %>
+  <div class="text-right">
+    <%= link_to t('view.groups.delete'), usergroup_path(id: @usergroup.id), method: :delete, class:"btn btn-danger text-right" %>
+  </div>
 <% end %>
+
+<table class="table mt-5">
+  <thead class="thead-dark text-center">
+    <tr>
+      <th><%= t('view.todotasks.name') %></th>
+      <th><%= t('view.todotasks.content') %></th>
+      <th><%= t('view.todotasks.author') %></th>
+      <th><%= t('view.todotasks.status') %></th>
+      <th><%= t('view.todotasks.deadline') %></th>
+    </tr>
+  </thead>
+  <% @users.each do |user| %>
+    <% @tasks.each do |task| %>
+      <% if task.user_id == user.user_id %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.content %></td>
+        <td class="text-center"><%= task.user.name %></td>
+        <td class="text-center">
+          <% if task.status == 1 %>
+            <%= t('view.todotasks.status_1') %>
+          <% elsif task.status == 2 %>
+            <%= t('view.todotasks.status_2') %>
+          <% else %>
+            <%= t('view.todotasks.status_3') %>
+          <% end %>
+        </td>
+        <td class="text-center"><%= task.deadline.year %>-<%= task.deadline.month %>-<%= task.deadline.day %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
