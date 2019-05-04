@@ -56,6 +56,7 @@ class TodotasksController < ApplicationController
   def new
     @todotask = Todotask.new
     @labels = Label.all
+    3.times { @uploadfiles = @todotask.taskfiles.build }
   end
 
   def create
@@ -115,6 +116,6 @@ class TodotasksController < ApplicationController
   end
 
   def todotask_params
-    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, label_ids: [])
+    params.require(:todotask).permit(:name, :content, :status, :deadline, :priority, label_ids: [], taskfiles_attributes: [:uploadfiles])
   end
 end

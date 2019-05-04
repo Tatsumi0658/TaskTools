@@ -27,5 +27,13 @@
   <% end %>
 
   <br />
+  <br />
+  <%= f.fields_for :taskfiles do |s| %>
+    <%= s.label :uploadfiles %>
+    <%= s.file_field :uploadfiles %>
+    <br />
+  <% end %>
+
+  <br />
   <%= f.submit class:"mt-4 btn btn-primary" %>
 <% end %>

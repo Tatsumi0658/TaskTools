@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_011959) do
+ActiveRecord::Schema.define(version: 2019_05_04_130131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2019_04_29_011959) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "taskfiles", force: :cascade do |t|
+    t.string "uploadfiles"
+    t.bigint "todotask_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["todotask_id"], name: "index_taskfiles_on_todotask_id"
+  end
+
   create_table "todotasks", force: :cascade do |t|
     t.string "name", null: false
     t.integer "status", null: false
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_04_29_011959) do
     t.datetime "updated_at", null: false
     t.text "content"
     t.boolean "read", default: false
+    t.json "uploadfiles"
     t.index ["name"], name: "index_todotasks_on_name"
     t.index ["priority"], name: "index_todotasks_on_priority"
     t.index ["user_id"], name: "index_todotasks_on_user_id"
@@ -67,5 +76,6 @@ ActiveRecord::Schema.define(version: 2019_04_29_011959) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "taskfiles", "todotasks"
   add_foreign_key "todotasks", "users"
 end

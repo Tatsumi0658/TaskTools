@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
+  #resources :todotasks do
+  #  resource :taskfiles
+  #end
+
   resources :my_resources, concerns: :paginatable
 
   namespace :admin do
