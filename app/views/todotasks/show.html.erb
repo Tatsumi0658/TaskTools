@@ -31,5 +31,11 @@
     <%= t('view.todotasks.priority_low') %>
   <% end %>
 </p>
+
+<h4>添付ファイル一覧</h4>
+<% @uploadfiles.each do |file| %>
+  <%= link_to file.uploadfiles_identifier, file.uploadfiles.url %>
+  <br />
+<% end %>
 <%= link_to t('view.edit'), edit_todotask_path(@todotask.id), class:"btn btn-secondary" %>
 <%= link_to t('view.delete'), todotask_path(@todotask.id), method: :delete, class:"btn btn-danger" %>

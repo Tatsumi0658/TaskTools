@@ -74,6 +74,7 @@ class TodotasksController < ApplicationController
 
   def edit
     @labels = Label.all
+    #3.times { @uploadfiles = @todotask.taskfiles.build }
   end
 
   def show
@@ -82,6 +83,7 @@ class TodotasksController < ApplicationController
       @todotask.read = true
       @todotask.save
     end
+    @uploadfiles = @todotask.taskfiles
   end
 
   def update
