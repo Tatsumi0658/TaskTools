@@ -54,6 +54,12 @@ class TodotasksController < ApplicationController
 
     if current_user.present?
       @calender_tasks = Todotask.where(user_id: current_user.id)
+      hash = {}
+      @labels.each do |label|
+        size = TaskLabel.where(label_id: label.id).count
+        hash.store(label.name,size)
+      end
+      @graph_data = hash
     end
   end
 
