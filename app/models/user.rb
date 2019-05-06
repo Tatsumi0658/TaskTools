@@ -10,6 +10,8 @@ class User < ApplicationRecord
   before_update :user_should_have_at_least_one_login_update
   before_destroy :user_should_have_at_least_one_login_delete
 
+  mount_uploader :icon, IconUploader
+
   private
 
   def user_should_have_at_least_one_login_delete

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only:[:destroy, :show]
+  before_action :set_user, only:[:destroy, :show, :edit, :update]
 
   def new
     if current_user.present?
@@ -22,6 +22,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    unless @user.id == current_user.id
+      redirect_to todotasks_path
+      flash[:danger] = t('.failed')
+    end
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path
+      flash[:success] = t('.success')
+    else
+      render :edit
+    end
+  end
+
   def show
     unless @user.id == current_user.id
       redirect_to todotasks_path
@@ -38,7 +54,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :icon)
   end
 
   def set_user

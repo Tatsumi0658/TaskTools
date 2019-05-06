@@ -17,5 +17,8 @@
   <%= f.label :password_confirmation, class:"mt-4" %>
   <%= f.password_field :password_confirmation, class:"form-control" %>
 
+  <%= f.label :icon, class:"mt-4" %>
+  <%= f.file_field :icon %>
+
   <%= f.submit class:"d-block btn btn-primary mt-4 mx-auto" %>
 <% end %>
