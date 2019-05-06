@@ -146,4 +146,14 @@
   <% end %>
 </table>
 
+<%= month_calendar events: @calender_tasks do |date, calenders| %>
+  <%= date %>
+
+  <% calenders.each do |calender| %>
+    <div class="text-danger">
+      <%= calender.name %>
+    </div>
+  <% end %>
+<% end %>
+
 <%= paginate @todotasks, class:"pagination" %>

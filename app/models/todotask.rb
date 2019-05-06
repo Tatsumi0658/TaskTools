@@ -7,5 +7,9 @@ class Todotask < ApplicationRecord
   has_many :task_labels, dependent: :destroy
   has_many :labels, through: :task_labels
   has_many :taskfiles, dependent: :destroy
-  accepts_nested_attributes_for :taskfiles, allow_destroy: true  
+  accepts_nested_attributes_for :taskfiles, allow_destroy: true
+
+  def start_time
+    self.deadline ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 end

@@ -51,6 +51,10 @@ class TodotasksController < ApplicationController
         end
       end
     end
+
+    if current_user.present?
+      @calender_tasks = Todotask.where(user_id: current_user.id)
+    end
   end
 
   def new
