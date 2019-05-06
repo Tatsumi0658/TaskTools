@@ -1,3 +1,7 @@
 <h1><%= t('view.users.show') %></h1>
 <%= @user.name %><br />
-<%= image_tag @user.icon.url %>
+<% unless @user.icon.nil? %>
+  <%= image_tag @user.icon.url %>
+<% end %>
+<br />
+<%= link_to t('view.edit'), edit_user_path, class:"btn btn-light" %>
